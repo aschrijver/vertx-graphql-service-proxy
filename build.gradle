@@ -7,13 +7,15 @@ buildscript {
     }
 }
 
-repositories {
-    mavenCentral()
-    jcenter()
-}
-
-apply plugin: 'java'
 apply plugin: 'maven-publish'
+
+publishing {
+    repositories {
+        maven {
+            url 'https://dl.bintray.com/engagingspaces/maven'
+        }
+    }
+}
 
 ext {
     vertxVersion = '3.3.0'
@@ -22,16 +24,18 @@ ext {
     junitVersion = '4.12'
 }
 
-group = 'io.engagingspaces'
-version = '1.0.0'
+subprojects {
+    apply plugin: 'java'
 
-sourceCompatibility = 1.8
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
 
-dependencies {
-    compile "io.vertx:vertx-core:$vertxVersion"
-    compile "io.vertx:vertx-codegen:$vertxVersion"
-    compile "io.vertx:vertx-service-proxy:$vertxVersion"
-    compile "com.graphql-java:graphql-java:$graphqlVersion"
+    group = 'io.engagingspaces'
+    version = '1.0.0'
+
+    sourceCompatibility = 1.8
 }
 
 task wrapper(type: Wrapper) {

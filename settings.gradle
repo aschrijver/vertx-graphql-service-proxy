@@ -1,1 +1,3 @@
-rootProject.name='vertx-graphql-json-marshaller'
+rootProject.name='vertx-graphql-schema-proxy'
+
+include 'graphql-json-marshaller', 'graphql-service-proxy'
