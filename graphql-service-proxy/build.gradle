@@ -7,6 +7,8 @@ dependencies {
     compile "io.vertx:vertx-service-proxy:$vertxVersion"
     compile "com.graphql-java:graphql-java:$graphqlVersion"
 
+    testCompile "io.engagingspaces:vertx-test-graphql-droids-microservice:$vertxGraphqlVersion"
+    testCompile "io.engagingspaces:vertx-test-graphql-starwars-microservice:$vertxGraphqlVersion"
     testCompile "junit:junit:$junitVersion"
     testCompile "io.vertx:vertx-unit:$vertxVersion"
 }
