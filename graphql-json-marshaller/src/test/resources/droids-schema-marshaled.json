@@ -1,0 +1,234 @@
+{
+  "__types" : {
+    "DroidQueries" : {
+      "__marshaled" : "graphql.schema.GraphQLObjectType",
+      "name" : "DroidQueries",
+      "fieldDefinitions" : [ {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "droidHero",
+        "type" : {
+          "$ref" : "#/__types/Droid"
+        },
+        "dataFetcher" : {
+          "$ref" : "#/__dataFetchers/f37fb468-3046-4442-9888-2abf80d06a0f"
+        },
+        "arguments" : [ {
+          "__marshaled" : "graphql.schema.GraphQLArgument",
+          "name" : "episode",
+          "description" : "If omitted, returns the hero of the whole saga. If provided, returns the hero of that particular episode.",
+          "type" : {
+            "$ref" : "#/__types/Episode"
+          }
+        } ]
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "droid",
+        "type" : {
+          "$ref" : "#/__types/Droid"
+        },
+        "dataFetcher" : {
+          "$ref" : "#/__dataFetchers/c47377b6-ade0-44e7-9222-f99dba207863"
+        },
+        "arguments" : [ {
+          "__marshaled" : "graphql.schema.GraphQLArgument",
+          "name" : "id",
+          "description" : "id of the droid",
+          "type" : {
+            "__marshaled" : "graphql.schema.GraphQLNonNull",
+            "wrappedType" : {
+              "$ref" : "#/__scalarTypes/String"
+            }
+          }
+        } ]
+      } ]
+    },
+    "Droid" : {
+      "__marshaled" : "graphql.schema.GraphQLObjectType",
+      "name" : "Droid",
+      "description" : "A mechanical creature in the Star Wars universe.",
+      "fieldDefinitions" : [ {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "id",
+        "description" : "The id of the droid.",
+        "type" : {
+          "__marshaled" : "graphql.schema.GraphQLNonNull",
+          "wrappedType" : {
+            "$ref" : "#/__scalarTypes/String"
+          }
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "name",
+        "description" : "The name of the droid.",
+        "type" : {
+          "$ref" : "#/__scalarTypes/String"
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "friends",
+        "description" : "The friends of the droid, or an empty list if they have none.",
+        "type" : {
+          "__marshaled" : "graphql.schema.GraphQLList",
+          "wrappedType" : {
+            "$ref" : "#/__interfaces/Character"
+          }
+        },
+        "dataFetcher" : {
+          "$ref" : "#/__dataFetchers/ad38744f-b7b6-476a-abf1-7aad5247db05"
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "appearsIn",
+        "description" : "Which movies they appear in.",
+        "type" : {
+          "__marshaled" : "graphql.schema.GraphQLList",
+          "wrappedType" : {
+            "$ref" : "#/__types/Episode"
+          }
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "primaryFunction",
+        "description" : "The primary function of the droid.",
+        "type" : {
+          "$ref" : "#/__scalarTypes/String"
+        }
+      } ],
+      "interfaces" : [ {
+        "$ref" : "#/__interfaces/Character"
+      } ]
+    },
+    "Episode" : {
+      "__marshaled" : "graphql.schema.GraphQLEnumType",
+      "name" : "Episode",
+      "description" : "One of the films in the Star Wars Trilogy",
+      "values" : [ {
+        "__marshaled" : "graphql.schema.GraphQLEnumValueDefinition",
+        "name" : "NEWHOPE",
+        "description" : "Released in 1977.",
+        "value" : 4
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLEnumValueDefinition",
+        "name" : "EMPIRE",
+        "description" : "Released in 1980.",
+        "value" : 5
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLEnumValueDefinition",
+        "name" : "JEDI",
+        "description" : "Released in 1983.",
+        "value" : 6
+      } ]
+    }
+  },
+  "__interfaces" : {
+    "Character" : {
+      "__marshaled" : "graphql.schema.GraphQLInterfaceType",
+      "name" : "Character",
+      "description" : "A character in the Star Wars Trilogy",
+      "typeResolver" : {
+        "$ref" : "#/__typeResolvers/fa2b1ac7-e1bf-447e-873d-2a0b5bdab3c6"
+      },
+      "fieldDefinitions" : [ {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "id",
+        "description" : "The id of the character.",
+        "type" : {
+          "__marshaled" : "graphql.schema.GraphQLNonNull",
+          "wrappedType" : {
+            "$ref" : "#/__scalarTypes/String"
+          }
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "name",
+        "description" : "The name of the character.",
+        "type" : {
+          "$ref" : "#/__scalarTypes/String"
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "friends",
+        "description" : "The friends of the character, or an empty list if they have none.",
+        "type" : {
+          "__marshaled" : "graphql.schema.GraphQLList",
+          "wrappedType" : {
+            "$ref" : "#/__interfaces/Character"
+          }
+        }
+      }, {
+        "__marshaled" : "graphql.schema.GraphQLFieldDefinition",
+        "name" : "appearsIn",
+        "description" : "Which movies they appear in.",
+        "type" : {
+          "__marshaled" : "graphql.schema.GraphQLList",
+          "wrappedType" : {
+            "$ref" : "#/__types/Episode"
+          }
+        }
+      } ]
+    }
+  },
+  "__typeResolvers" : {
+    "fa2b1ac7-e1bf-447e-873d-2a0b5bdab3c6" : {
+      "__marshaled" : "graphql.schema.TypeResolver",
+      "__marshaledClass" : "org.example.servicediscovery.server.droids.DroidsData$$Lambda$9/1354691837",
+      "__parent" : {
+        "$ref" : "#/__interfaces/Character"
+      },
+      "id" : "fa2b1ac7-e1bf-447e-873d-2a0b5bdab3c6"
+    }
+  },
+  "__dataFetchers" : {
+    "ad38744f-b7b6-476a-abf1-7aad5247db05" : {
+      "__marshaled" : "graphql.schema.DataFetcher",
+      "__marshaledClass" : "org.example.servicediscovery.server.droids.DroidsData$$Lambda$10/1363745818",
+      "__parent" : {
+        "$ref" : "#/__types/Droid/fieldDefinitions/friends"
+      },
+      "id" : "ad38744f-b7b6-476a-abf1-7aad5247db05"
+    },
+    "c47377b6-ade0-44e7-9222-f99dba207863" : {
+      "__marshaled" : "graphql.schema.DataFetcher",
+      "__marshaledClass" : "org.example.servicediscovery.server.droids.DroidsData$$Lambda$11/1039563660",
+      "__parent" : {
+        "$ref" : "#/__types/DroidQueries/fieldDefinitions/droid"
+      },
+      "id" : "c47377b6-ade0-44e7-9222-f99dba207863"
+    },
+    "f37fb468-3046-4442-9888-2abf80d06a0f" : {
+      "__marshaled" : "graphql.schema.StaticDataFetcher",
+      "__marshaledClass" : "graphql.schema.StaticDataFetcher",
+      "__parent" : {
+        "$ref" : "#/__types/DroidQueries/fieldDefinitions/droidHero"
+      },
+      "id" : "f37fb468-3046-4442-9888-2abf80d06a0f",
+      "staticValue" : {
+        "appearsIn" : [ 4, 5, 6 ],
+        "name" : "R2-D2",
+        "primaryFunction" : "Astromech",
+        "id" : "2001",
+        "friends" : [ "1000", "1002", "1003" ]
+      }
+    }
+  },
+  "__scalarTypes" : {
+    "String" : {
+      "__marshaled" : "graphql.schema.GraphQLScalarType",
+      "name" : "String",
+      "description" : "Built-in String"
+    },
+    "Boolean" : {
+      "__marshaled" : "graphql.schema.GraphQLScalarType",
+      "name" : "Boolean",
+      "description" : "Built-in Boolean"
+    }
+  },
+  "__schemas" : {
+    "DroidQueries" : {
+      "__marshaled" : "graphql.schema.GraphQLSchema",
+      "queryType" : {
+        "$ref" : "#/__types/DroidQueries"
+      }
+    }
+  }
+}
