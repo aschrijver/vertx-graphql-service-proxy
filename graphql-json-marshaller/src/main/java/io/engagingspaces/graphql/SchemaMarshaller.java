@@ -19,6 +19,7 @@ package io.engagingspaces.graphql;
 import graphql.schema.GraphQLSchema;
 import io.engagingspaces.graphql.json.JsonSerializable;
 import io.engagingspaces.graphql.schema.Marshaller;
+import io.engagingspaces.graphql.schema.SchemaContext;
 import io.engagingspaces.graphql.schema.Unmarshaller;
 import io.vertx.core.json.JsonObject;
 
@@ -43,6 +44,28 @@ public interface SchemaMarshaller {
     }
 
     /**
+     * Marshals the {@link GraphQLSchema} instance to its json representation, using the provided marshaller options.
+     *
+     * @param schema  the graphql schema
+     * @param options  the marshaller options
+     * @return the json data
+     */
+    static JsonObject toJson(GraphQLSchema schema, SchemaMarshallerOptions options) {
+        return ((JsonSerializable) decorateSchema(schema, options)).toJson();
+    }
+
+    /**
+     * Marshals the {@link GraphQLSchema} instance to its json representation, using the provided schema context.
+     *
+     * @param schema  the graphql schema
+     * @param context the schema context
+     * @return the json data
+     */
+    static JsonObject toJson(GraphQLSchema schema, SchemaContext context) {
+        return ((JsonSerializable) decorateSchema(schema, context)).toJson();
+    }
+
+    /**
      * Un-marshals the provided json data to a {@link GraphQLSchema} instance.
      *
      * @param json the json
@@ -55,6 +78,33 @@ public interface SchemaMarshaller {
     }
 
     /**
+     * Un-marshals the json data to a {@link GraphQLSchema} instance, using the provided marshaller options.
+     *
+     * @param json     the json
+     * @param options  the marshaller options
+     * @return the graphql schema object
+     * @throws ClassCastException if expected type does not match un-marshaled object type
+     */
+    static GraphQLSchema fromJson(JsonObject json, SchemaMarshallerOptions options) {
+        Objects.requireNonNull(json, "Json serialization data cannot be null");
+        Objects.requireNonNull(options, "Schema marshaller options cannot be null");
+        return Unmarshaller.unmarshall(json, Unmarshaller.createContext(options, json), null);
+    }
+
+    /**
+     * Un-marshals the json data to a {@link GraphQLSchema} instance, using the provided schema context.
+     *
+     * @param json    the json
+     * @param context the schema context (created if null)
+     * @return the graphql schema object
+     * @throws ClassCastException if expected type does not match un-marshaled object type
+     */
+    static GraphQLSchema fromJson(JsonObject json, SchemaContext context) {
+        Objects.requireNonNull(json, "Json serialization data cannot be null");
+        return Unmarshaller.unmarshall(json, Unmarshaller.createContextIfMissing(context, json), null);
+    }
+
+    /**
      * Creates a decorated version of the provided {@link GraphQLSchema} instance.
      *
      * @param original the original schema object
@@ -63,5 +113,30 @@ public interface SchemaMarshaller {
     static GraphQLSchema decorateSchema(GraphQLSchema original) {
         Objects.requireNonNull(original, "Original schema object cannot be null");
         return Marshaller.createContext().decoratorOf(original);
+    }
+
+    /**
+     * Creates a decorated version of the {@link GraphQLSchema} instance, using the provided marshaller options.
+     *
+     * @param original the original schema object
+     * @param options  the marshaller options
+     * @return the decorated schema object
+     */
+    static GraphQLSchema decorateSchema(GraphQLSchema original, SchemaMarshallerOptions options) {
+        Objects.requireNonNull(original, "Original schema object cannot be null");
+        Objects.requireNonNull(options, "Schema marshaller options cannot be null");
+        return Marshaller.createContext(options).decoratorOf(original);
+    }
+
+    /**
+     * Creates a decorated version of the {@link GraphQLSchema} instance, using the provided schema context.
+     *
+     * @param original the original schema object
+     * @param context  the schema context (created if null)
+     * @return the decorated schema object
+     */
+    static GraphQLSchema decorateSchema(GraphQLSchema original, SchemaContext context) {
+        Objects.requireNonNull(original, "Original schema object cannot be null");
+        return Marshaller.createContextIfMissing(context).decoratorOf(original);
     }
 }
