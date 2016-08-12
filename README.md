@@ -1,4 +1,4 @@
-# Vert.x GraphQL Schema Proxy
+# Vert.x GraphQL Service Proxy
 
 This project provides support for creating service proxies for `GraphQLSchema` definitions and on the Vert.x event bus.
 Schema proxies are created by wrapping the various GraphQL classes that exist in the `graphql.schemas` package of [graphql-java](https://github.com/graphql-java/graphql-java) as Vert.x data objects that can be marshalled to JSON and sent on the event bus.
