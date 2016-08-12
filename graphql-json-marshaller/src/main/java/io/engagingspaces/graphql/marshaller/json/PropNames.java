@@ -21,40 +21,40 @@ package io.engagingspaces.graphql.marshaller.json;
  *
  * @author <a href="https://github.com/aschrijver/">Arnold Schrijver</a>
  */
-public interface PropNames {
-    String ARGUMENTS = "arguments";
-    String DATA_FETCHER = "dataFetcher";
-    String DEFAULT_VALUE = "defaultValue";
-    String DEPRECATION_REASON = "deprecationReason";
-    String DESCRIPTION = "description";
-    String DICTIONARY = "dictionary";
-    String DIRECTIVES = "directives";
-    String FIELD_DEFINITIONS = "fieldDefinitions";
-    String FIELDS = "fields";
-    String ID = "id";
-    String INTERFACES = "interfaces";
-    String IS_ON_FIELD = "isOnField";
-    String IS_ON_FRAGMENT = "isOnFragment";
-    String IS_ON_OPERATION = "isOnOperation";
-    String MUTATION_TYPE = "mutationType";
-    String NAME = "name";
-    String QUERY_TYPE = "queryType";
-    String STATIC_VALUE = "staticValue";
-    String TYPE = "type";
-    String TYPES = "types";
-    String TYPE_RESOLVER = "typeResolver";
-    String VALUE = "value";
-    String VALUES = "values";
-    String WRAPPED_TYPE = "wrappedType";
+public final class PropNames {
+    public static final String ARGUMENTS = "arguments";
+    public static final String DATA_FETCHER = "dataFetcher";
+    public static final String DEFAULT_VALUE = "defaultValue";
+    public static final String DEPRECATION_REASON = "deprecationReason";
+    public static final String DESCRIPTION = "description";
+    public static final String DICTIONARY = "dictionary";
+    public static final String DIRECTIVES = "directives";
+    public static final String FIELD_DEFINITIONS = "fieldDefinitions";
+    public static final String FIELDS = "fields";
+    public static final String ID = "id";
+    public static final String INTERFACES = "interfaces";
+    public static final String IS_ON_FIELD = "isOnField";
+    public static final String IS_ON_FRAGMENT = "isOnFragment";
+    public static final String IS_ON_OPERATION = "isOnOperation";
+    public static final String MUTATION_TYPE = "mutationType";
+    public static final String NAME = "name";
+    public static final String QUERY_TYPE = "queryType";
+    public static final String STATIC_VALUE = "staticValue";
+    public static final String TYPE = "type";
+    public static final String TYPES = "types";
+    public static final String TYPE_RESOLVER = "typeResolver";
+    public static final String VALUE = "value";
+    public static final String VALUES = "values";
+    public static final String WRAPPED_TYPE = "wrappedType";
 
     // Used in json marshaling
-    String DATA_FETCHERS = "__dataFetchers";
-    String MARSHALED_TYPE = "__marshaled";
-    String MARSHALED_TYPE_CLASS = "__marshaledClass";
-    String PARENT = "__parent";
-    String SCALAR_TYPES = "__scalarTypes";
-    String SCHEMA_INTERFACES = "__interfaces";
-    String SCHEMA_TYPES = "__types";
-    String SCHEMAS = "__schemas";
-    String TYPE_RESOLVERS = "__typeResolvers";
+    public static final String DATA_FETCHERS = "__dataFetchers";
+    public static final String MARSHALED_TYPE = "__marshaled";
+    public static final String MARSHALED_TYPE_CLASS = "__marshaledClass";
+    public static final String PARENT = "__parent";
+    public static final String SCALAR_TYPES = "__scalarTypes";
+    public static final String SCHEMA_INTERFACES = "__interfaces";
+    public static final String SCHEMA_TYPES = "__types";
+    public static final String SCHEMAS = "__schemas";
+    public static final String TYPE_RESOLVERS = "__typeResolvers";
 }

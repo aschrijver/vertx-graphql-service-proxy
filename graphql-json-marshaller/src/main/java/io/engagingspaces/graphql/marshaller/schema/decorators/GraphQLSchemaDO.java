@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static io.engagingspaces.graphql.marshaller.json.PropNames.*;
 import static io.engagingspaces.graphql.marshaller.schema.SchemaContext.EMPTY;
 
 /**

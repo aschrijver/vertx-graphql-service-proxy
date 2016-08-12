@@ -29,6 +29,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.util.UUID;
 
+import static io.engagingspaces.graphql.marshaller.json.PropNames.*;
 import static io.engagingspaces.graphql.marshaller.json.JsonReference.REF_KEY;
 
 /**

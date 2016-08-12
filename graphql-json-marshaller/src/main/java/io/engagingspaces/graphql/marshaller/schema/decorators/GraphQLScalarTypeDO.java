@@ -25,6 +25,7 @@ import io.engagingspaces.graphql.marshaller.schema.SchemaContext;
 import io.engagingspaces.graphql.marshaller.schema.SchemaDecorator;
 import io.vertx.core.json.JsonObject;
 
+import static io.engagingspaces.graphql.marshaller.json.PropNames.*;
 import static io.engagingspaces.graphql.marshaller.schema.SchemaContext.EMPTY;
 
 /**
