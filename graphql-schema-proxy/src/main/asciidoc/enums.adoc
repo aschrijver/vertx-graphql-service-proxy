@@ -1,0 +1,24 @@
+= Enums
+
+[[SchemaProxyType]]
+== SchemaProxyType
+
+++++
+ Data object wrapper for .
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[ProxyClient]]`ProxyClient`|
++++
+Proxies the GraphQL schema consumer-side, and delegates calls to type resolvers and data fetchers to the service.
++++
+|[[ServiceProxy]]`ServiceProxy`|
++++
+Proxies the GraphQl schema as a regular Vert.x service proxy, and executes queries in the service implementation.
++++
+|===
+
