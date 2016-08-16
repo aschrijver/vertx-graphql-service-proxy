@@ -63,6 +63,7 @@ public class GraphQLInputObjectFieldDO extends GraphQLInputObjectField
      *
      * @param json    the json data
      * @param context the schema context
+     * @param parent   the parent input object type
      */
     @SuppressWarnings("unused")
     public GraphQLInputObjectFieldDO(JsonObject json, SchemaContext context, GraphQLInputObjectTypeDO parent) {

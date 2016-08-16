@@ -65,6 +65,7 @@ public class GraphQLFieldDefinitionDO extends GraphQLFieldDefinition
      *
      * @param json    the json data
      * @param context the schema context
+     * @param parent  the parent graphql type
      */
     @SuppressWarnings("unused")
     public GraphQLFieldDefinitionDO(JsonObject json, SchemaContext context, GraphQLType parent) {
@@ -78,6 +79,7 @@ public class GraphQLFieldDefinitionDO extends GraphQLFieldDefinition
      *
      * @param original the schema object to decorate
      * @param context  the schema context
+     * @param parent   the parent graphql type
      * @return the schema object decorated as a vertx data object
      */
     public static GraphQLFieldDefinition create(

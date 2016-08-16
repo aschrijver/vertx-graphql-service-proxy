@@ -79,7 +79,8 @@ public class TypeResolverDO implements TypeResolver, SchemaChildDecorator<TypeRe
      * Creates a decorator of the provided GraphQL type resolver that turns it into a Vert.x data object.
      *
      * @param resolver the type resolver
-     * @param context the schema context
+     * @param context  the schema context
+     * @param parent   the parent graphql type
      * @return the type resolver decorated as a vertx data object
      */
     public static TypeResolver create(TypeResolver resolver, SchemaContext context, GraphQLType parent) {

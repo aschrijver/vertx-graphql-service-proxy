@@ -76,6 +76,8 @@ public interface JsonReference {
 
     /**
      * Gets the json key of the node being referenced. Corresponds to the final part of the json reference string.
+     *
+     * @return the target key
      */
     String getTargetKey();
 

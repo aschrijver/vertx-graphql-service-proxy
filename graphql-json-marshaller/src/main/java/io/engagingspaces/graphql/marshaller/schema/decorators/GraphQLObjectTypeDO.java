@@ -21,7 +21,6 @@ import graphql.schema.GraphQLInterfaceType;
 import graphql.schema.GraphQLObjectType;
 import io.engagingspaces.graphql.marshaller.json.JsonReference;
 import io.engagingspaces.graphql.marshaller.json.impl.JsonObjectHelper;
-import io.engagingspaces.graphql.marshaller.json.PropNames;
 import io.engagingspaces.graphql.marshaller.schema.SchemaContext;
 import io.engagingspaces.graphql.marshaller.schema.SchemaDecorator;
 import io.vertx.core.json.JsonObject;
@@ -30,6 +29,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static io.engagingspaces.graphql.marshaller.json.PropNames.*;
 
 /**
  * Data object wrapper for {@link GraphQLObjectType}.
@@ -66,7 +67,7 @@ public class GraphQLObjectTypeDO extends GraphQLObjectType
     @SuppressWarnings("unused")
     public GraphQLObjectTypeDO(JsonObject json, SchemaContext context) {
         this(null, json, context);
-        this.fields = context.unmarshallList(json, PropNames.FIELD_DEFINITIONS, this);
+        this.fields = context.unmarshallList(json, FIELD_DEFINITIONS, this);
     }
 
     /**
@@ -89,13 +90,13 @@ public class GraphQLObjectTypeDO extends GraphQLObjectType
             return objectTypeJson;
         }
         return JsonObjectHelper.jsonObject()
-                .put(PropNames.MARSHALED_TYPE, GraphQLObjectType.class.getName())
-                .put(PropNames.NAME, getName())
-                .putIfPresent(PropNames.DESCRIPTION, getDescription())
-                .put(PropNames.FIELD_DEFINITIONS, getFieldDefinitions().stream()
+                .put(MARSHALED_TYPE, GraphQLObjectType.class.getName())
+                .put(NAME, getName())
+                .putIfPresent(DESCRIPTION, getDescription())
+                .put(FIELD_DEFINITIONS, getFieldDefinitions().stream()
                         .map(context::marshall)
                         .collect(Collectors.toList()))
-                .putIfPresent(PropNames.INTERFACES, getInterfaces().stream()
+                .putIfPresent(INTERFACES, getInterfaces().stream()
                         .map(context::referenceTo)
                         .collect(Collectors.toList()));
     }
@@ -130,7 +131,7 @@ public class GraphQLObjectTypeDO extends GraphQLObjectType
     @Override
     public List<GraphQLInterfaceType> getInterfaces() {
         if (objectType == null) {
-            return context.unmarshallList(objectTypeJson, PropNames.INTERFACES);
+            return context.unmarshallList(objectTypeJson, INTERFACES);
         }
         return objectType.getInterfaces().stream()
                 .map(iface -> context.decoratorOf(iface, this))
@@ -140,7 +141,7 @@ public class GraphQLObjectTypeDO extends GraphQLObjectType
     @Override
     public String getDescription() {
         if (objectType == null) {
-            return objectTypeJson.getString(PropNames.DESCRIPTION);
+            return objectTypeJson.getString(DESCRIPTION);
         }
         return objectType.getDescription();
     }
@@ -148,7 +149,7 @@ public class GraphQLObjectTypeDO extends GraphQLObjectType
     @Override
     public String getName() {
         if (objectType == null) {
-            return objectTypeJson.getString(PropNames.NAME);
+            return objectTypeJson.getString(NAME);
         }
         return objectType.getName();
     }

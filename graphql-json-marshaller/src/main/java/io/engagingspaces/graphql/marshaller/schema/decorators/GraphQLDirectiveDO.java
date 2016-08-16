@@ -64,6 +64,7 @@ public class GraphQLDirectiveDO extends GraphQLDirective
      *
      * @param json    the json data
      * @param context the schema context
+     * @param parent  the parent graphql schema
      */
     @SuppressWarnings("unused")
     public GraphQLDirectiveDO(JsonObject json, SchemaContext context, GraphQLSchemaDO parent) {

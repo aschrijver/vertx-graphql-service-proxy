@@ -36,7 +36,7 @@ import java.util.List;
  */
 public interface Unmarshaller {
 
-    String DECORATOR_PACKAGE = "io.engagingspaces.graphql.schema.decorators";
+    String DECORATOR_PACKAGE = "io.engagingspaces.graphql.marshaller.schema.decorators";
     String DECORATOR_POSTFIX = "DO";
     String DOT = ".";
 
@@ -76,7 +76,14 @@ public interface Unmarshaller {
     }
 
     /**
-     * Used internally for un-marshaling.
+     * Used internally for un-marshaling of schema objects.
+     *
+     * @param json    the json object to un-marshall
+     * @param context the schema context
+     * @param parent  the parent schema object (can be null)
+     * @param <T>     type parameter indicating the schema object type to return
+     * @param <U>     type parameter indicating the type of the parent schema object
+     * @return the un-marshaled schema decorator object
      */
     @SuppressWarnings("unchecked")
     static <T, U> T unmarshall(JsonObject json, SchemaContext context, U parent) {
@@ -115,6 +122,7 @@ public interface Unmarshaller {
      *
      * @param json the serialized json
      * @param <T>  type parameter indicating the type of the returned schema decorator object
+     * @param <U>  type parameter indicating the type of the parent schema object
      * @return the schema decorator object
      */
     <T extends SchemaDecorator, U extends SchemaDecorator> T dereference(Object json, U parent);
@@ -134,6 +142,7 @@ public interface Unmarshaller {
      * @param json   the serialized json
      * @param parent the parent schema decorator object
      * @param <T>    type parameter indicating the type of the returned schema decorator object
+     * @param <U>    type parameter indicating the type of the parent schema object
      * @return the schema decorator object
      */
     <T extends SchemaDecorator, U extends SchemaDecorator> T unmarshall(JsonObject json, U parent);
@@ -159,6 +168,7 @@ public interface Unmarshaller {
      * @param listKey the key where the list is located
      * @param parent  the parent schema decorator object
      * @param <T>     type parameter indicating the type of the return list values
+     * @param <U>     type parameter indicating the type of the parent schema object
      * @return the list of schema decorator objects
      */
     <T, U extends SchemaDecorator> List<T> unmarshallList(JsonObject json, String listKey, U parent);
