@@ -19,7 +19,7 @@ package io.engagingspaces.graphql.marshaller;
 import graphql.schema.*;
 import io.engagingspaces.graphql.marshaller.schema.SchemaDecorator;
 import io.vertx.core.json.JsonObject;
-import org.example.servicediscovery.server.droids.DroidsSchema;
+import org.example.graphql.testdata.droids.DroidsSchema;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

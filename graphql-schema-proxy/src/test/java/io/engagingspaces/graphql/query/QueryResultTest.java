@@ -21,9 +21,8 @@ import graphql.GraphQLError;
 import graphql.language.SourceLocation;
 import graphql.validation.ValidationError;
 import graphql.validation.ValidationErrorType;
-import io.engagingspaces.servicediscovery.graphql.publisher.SchemaDefinition;
-import io.engagingspaces.servicediscovery.graphql.query.QueryResult;
-import org.example.servicediscovery.server.utils.MapBuilder;
+import io.engagingspaces.graphql.schema.SchemaDefinition;
+import org.example.graphql.testdata.utils.MapBuilder;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import org.junit.Test;
@@ -58,7 +57,7 @@ public class QueryResultTest {
         }
     };
 
-    private static final io.engagingspaces.servicediscovery.graphql.query.QueryResult EXPECTED_SUCCESS = new io.engagingspaces.servicediscovery.graphql.query.QueryResult(new JsonObject(
+    private static final QueryResult EXPECTED_SUCCESS = new QueryResult(new JsonObject(
             "{\n" +
             "  \"data\": {\n" +
             "    \"query-data\": true\n" +
@@ -84,7 +83,7 @@ public class QueryResultTest {
         }
     };
 
-    private static final io.engagingspaces.servicediscovery.graphql.query.QueryResult EXPECTED_FAILURE = new io.engagingspaces.servicediscovery.graphql.query.QueryResult(new JsonObject(
+    private static final QueryResult EXPECTED_FAILURE = new QueryResult(new JsonObject(
             "{\n" +
             "  \"data\": {},\n" +
             "  \"succeeded\": false," +
@@ -121,8 +120,8 @@ public class QueryResultTest {
         // given
         final ExecutionResult input = QUERY_RESULT_SUCCESS;
         // when
-        io.engagingspaces.servicediscovery.graphql.query.QueryResult result = new io.engagingspaces.servicediscovery.graphql.query.QueryResult(new io.engagingspaces.servicediscovery.graphql.query.QueryResult(
-                new io.engagingspaces.servicediscovery.graphql.query.QueryResult(SchemaDefinition.convertToQueryResult(input)).toJson()));
+        QueryResult result = new QueryResult(new QueryResult(
+                new QueryResult(SchemaDefinition.convertToQueryResult(input)).toJson()));
         // then
         assertNotNull(result.getData());
         assertEquals(true, result.getData().getBoolean("query-data"));
@@ -138,7 +137,7 @@ public class QueryResultTest {
         // given
         final ExecutionResult input = QUERY_RESULT_FAILURE;
         // when
-        io.engagingspaces.servicediscovery.graphql.query.QueryResult result = new io.engagingspaces.servicediscovery.graphql.query.QueryResult(new io.engagingspaces.servicediscovery.graphql.query.QueryResult(SchemaDefinition.convertToQueryResult(input).toJson()));
+        QueryResult result = new QueryResult(new QueryResult(SchemaDefinition.convertToQueryResult(input).toJson()));
         // then
         assertEquals(result.getData(), new JsonObject());
         assertEquals(result, result);
@@ -161,10 +160,10 @@ public class QueryResultTest {
 
     @Test
     public void should_Create_Error_And_Error_Location_Separately() {
-        io.engagingspaces.servicediscovery.graphql.query.QueryResult.QueryError error = new io.engagingspaces.servicediscovery.graphql.query.QueryResult.QueryError("type", "msg",
-                Collections.singletonList(new io.engagingspaces.servicediscovery.graphql.query.QueryResult.ErrorLocation(new io.engagingspaces.servicediscovery.graphql.query.QueryResult.ErrorLocation(3, 7))));
+        QueryResult.QueryError error = new QueryResult.QueryError("type", "msg",
+                Collections.singletonList(new QueryResult.ErrorLocation(new QueryResult.ErrorLocation(3, 7))));
         assertEquals(7, error.getLocations().get(0).getColumn());
-        io.engagingspaces.servicediscovery.graphql.query.QueryResult.QueryError error2 = new QueryResult.QueryError(error);
+        QueryResult.QueryError error2 = new QueryResult.QueryError(error);
         assertEquals(error.hashCode(), error2.hashCode());
         assertEquals(error.getLocations().get(0).hashCode(), error2.getLocations().get(0).hashCode());
         assertEquals(error2.getLocations().get(0), error2.getLocations().get(0));
