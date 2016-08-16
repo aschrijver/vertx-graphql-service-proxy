@@ -80,7 +80,7 @@ public interface Unmarshaller {
      *
      * @param json    the json object to un-marshall
      * @param context the schema context
-     * @param parent  the parent schema object (can be null)
+     * @param parent  the parent schema decorator object (can be null)
      * @param <T>     type parameter indicating the schema object type to return
      * @param <U>     type parameter indicating the type of the parent schema object
      * @return the un-marshaled schema decorator object
@@ -120,9 +120,10 @@ public interface Unmarshaller {
      * <p>
      * If not found in the list of decorated types, the json is first un-marshaled, registered and returned.
      *
-     * @param json the serialized json
-     * @param <T>  type parameter indicating the type of the returned schema decorator object
-     * @param <U>  type parameter indicating the type of the parent schema object
+     * @param json   the serialized json
+     * @param parent the parent schema decorator object
+     * @param <T>    type parameter indicating the type of the returned schema decorator object
+     * @param <U>    type parameter indicating the type of the parent schema object
      * @return the schema decorator object
      */
     <T extends SchemaDecorator, U extends SchemaDecorator> T dereference(Object json, U parent);

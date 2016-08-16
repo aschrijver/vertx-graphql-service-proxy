@@ -19,8 +19,9 @@ package io.engagingspaces.graphql.marshaller.schema;
 import io.engagingspaces.graphql.marshaller.json.JsonSerializable;
 
 /**
+ * Interface that is implemented by GraphQL schema decorator instances.
  *
- * @param <T>
+ * @param <T> type parameter indicating the type of schema object that is decorated
  * @author <a href="https://github.com/aschrijver/">Arnold Schrijver</a>
  */
 public interface SchemaDecorator<T> extends JsonSerializable {

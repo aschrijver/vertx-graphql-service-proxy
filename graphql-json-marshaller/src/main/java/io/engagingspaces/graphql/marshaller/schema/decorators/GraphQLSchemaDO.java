@@ -97,7 +97,7 @@ public class GraphQLSchemaDO extends GraphQLSchema implements SchemaDecorator<Gr
      * @param schema the original schema
      * @return the decorated schema
      */
-    public static GraphQLSchemaDO of(GraphQLSchema schema) {
+    public static GraphQLSchema of(GraphQLSchema schema) {
         return new GraphQLSchemaDO(schema, Marshaller.createContext());
     }
 
@@ -108,7 +108,7 @@ public class GraphQLSchemaDO extends GraphQLSchema implements SchemaDecorator<Gr
      * @param context the schema context
      * @return the decorated schema
      */
-    public static GraphQLSchemaDO of(GraphQLSchema schema, SchemaContext context) {
+    public static GraphQLSchema of(GraphQLSchema schema, SchemaContext context) {
         return new GraphQLSchemaDO(schema, Marshaller.createContextIfMissing(context));
     }
 
