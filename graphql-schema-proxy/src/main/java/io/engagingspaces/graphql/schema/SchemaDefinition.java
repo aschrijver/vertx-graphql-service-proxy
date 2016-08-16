@@ -88,6 +88,27 @@ public interface SchemaDefinition extends Queryable {
     GraphQLSchema schema();
 
     /**
+     * Creates schema metadata for the GraphQL schema proxy being created using the provided marshaled proxy json.
+     *
+     * @param proxyJson the marshaled schema json that is used by the client proxy
+     * @param metadata  additional metadata to pass to the service
+     * @return the schema metadata data object
+     */
+    default SchemaMetadata createServiceMetadata(JsonObject proxyJson, JsonObject metadata) {
+        if (options().getSchemaName() == null) {
+            options().setSchemaName(schema().getQueryType().getName());
+        }
+        metadata.put(SchemaMetadata.METADATA_QUERIES, schema().getQueryType().getFieldDefinitions().stream()
+                .map(GraphQLFieldDefinition::getName).collect(Collectors.toList()));
+        metadata.put(SchemaMetadata.METADATA_MUTATIONS,
+                !schema().isSupportingMutations() ? Collections.emptyList() :
+                        schema().getMutationType().getFieldDefinitions().stream()
+                                .map(GraphQLFieldDefinition::getName).collect(Collectors.toList()));
+
+        return SchemaMetadata.create(proxyJson, metadata, this.options());
+    }
+
+    /**
      * Creates schema metadata for the GraphQL schema proxy being created.
      * <p>
      * The metadata that is returned depends on the schema proxy type. For {@link SchemaProxyType#ServiceProxy}
@@ -104,27 +125,11 @@ public interface SchemaDefinition extends Queryable {
      * @return the schema metadata data object
      */
     default SchemaMetadata createServiceMetadata(JsonObject metadata) {
-
-        if (options().getSchemaName() == null) {
-            options().setSchemaName(schema().getQueryType().getName());
-        }
-        JsonObject proxyJson;
         if (SchemaProxyType.ServiceProxy.equals(options().getProxyType())) {
-            proxyJson = new JsonObject();
-        } else {
-            proxyJson = SchemaMarshaller.toJson(schema());
+            return createServiceMetadata(SchemaMarshaller.toJson(schema()));
         }
-
-        metadata.put(SchemaMetadata.METADATA_QUERIES, schema().getQueryType().getFieldDefinitions().stream()
-                .map(GraphQLFieldDefinition::getName).collect(Collectors.toList()));
-        metadata.put(SchemaMetadata.METADATA_MUTATIONS,
-                !schema().isSupportingMutations() ? Collections.emptyList() :
-                        schema().getMutationType().getFieldDefinitions().stream()
-                                .map(GraphQLFieldDefinition::getName).collect(Collectors.toList()));
-
-        return SchemaMetadata.create(proxyJson, metadata, this.options());
+        return createServiceMetadata(new JsonObject(), metadata);
     }
-
 
     /**
      * Gets the configuration options of the schema definition.

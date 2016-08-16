@@ -93,6 +93,13 @@ Gets the errors that occurred on query execution, if the GraphQL query was not s
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[clientProxy]]`clientProxy`|`Boolean`|-
+|[[clientProxy]]`clientProxy`|`Boolean`|
++++
+Gets the flag that determines whether to use a client proxy at the schema consumer side.
++++
+|[[serviceAddress]]`serviceAddress`|`String`|
++++
+Gets the address of the service proxy to use for the schema definition.
++++
 |===
 
