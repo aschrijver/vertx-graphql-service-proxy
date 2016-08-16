@@ -20,7 +20,7 @@ publishing {
 ext {
     vertxVersion = '3.3.0'
     graphqlVersion = '2.0.0'
-    vertxGraphqlVersion = '0.9.3'
+    vertxGraphqlVersion = '0.9.4'
 
     junitVersion = '4.12'
 }
@@ -31,10 +31,13 @@ subprojects {
     repositories {
         mavenCentral()
         jcenter()
+        maven {
+            url 'https://dl.bintray.com/engagingspaces/maven'
+        }
     }
 
     group = 'io.engagingspaces'
-    version = '0.9.3'
+    version = '0.9.5'
 
     sourceCompatibility = 1.8
 }
